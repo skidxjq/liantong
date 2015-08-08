@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="js/plugins/citySelector.css">
+
+<div class="row m-b m-l m-t" >
+    <div class="col-lg-4 ">
+        <div class="btn-group">
+
+            <button class="btn  btn-default" ng-click="changeView('agendaDay')">今天</button>
+            <button class="btn  btn-default" ng-click="changeView('agendaWeek')">昨天</button>
+            <button class="btn  btn-default" ng-click="changeView('month')">最近7天</button>
+            <button class="btn  btn-default" ng-click="changeView('month')">最近30天</button>
+
+
+        </div>
+    </div>
+    <div class="col-lg-2" style="margin-left:0">
+        <p class="input-group form_datetime">
+            <input type="text" class="form-control" id="datePicker" placeholder="choose start date"/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default time"><i class="glyphicon glyphicon-time"></i></button>
+            </span>
+        </p>
+    </div>
+    <div class="col-lg-2" style="margin-left:0">
+        <p class="input-group form_datetime">
+            <input type="text" class="form-control" id="datePicker2" placeholder="choose end date"/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default time"><i class="glyphicon glyphicon-time"></i></button>
+            </span>
+        </p>
+    </div>
+    <div class="col-lg-2">
+        <p class="input-group">
+            <input type="text" class="form-control" id="citySelect" placeholder="选择地区"/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-map-marker"></i></button>
+            </span>
+        </p>
+    </div>
+
+
+</div>
+
+<div class="row  m-b m-l m-t">
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="12">
+                <p class="input-group">
+                    <input type="text" class="form-control" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+
+                    </span>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default">高级搜索</button>
+
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row m-l m-r" ng-controller="WithAjaxCtrl as showCase">
+    <div class="panel panel-default ">
+        <div class="panel-heading">
+            骚扰电话列表
+        </div>
+        <div class="table-responsive">
+            <table ui-jq="dataTable" datatable="" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class=" m-l m-r table table-striped m-b-none"></table>
+
+        </div>
+
+    </div>
+</div>
+
+
+</div>
+<script src="js/plugins/bootstrap-datepicker.min.js"></script>
+<script src="js/plugins/citySelector.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var test=new Vcity.CitySelector({input:'citySelect'});
+</script>
+<script >
+
+    $('.form_datetime').datepicker()
+</script>

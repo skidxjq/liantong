@@ -1,0 +1,303 @@
+<div class="col" ng-controller="userEvaluateController" >
+    <div class="wrapper-md">
+        <div class="row-fluid">
+            <div class="text-center">
+
+                <div class="col-lg-2 col-sm-6">
+                    <div class="panel bg-dark padder-v item">
+                        <div class="text-white h3 m-b-sm" id=""  num-move="-" style="height: 39px">{{telNumber}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white ">号码</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-sm-6">
+                    <div class="panel bg-primary padder-v item">
+                        <div class="h1 text-white h1 m-b-sm" id="callingCount"  num-move="-" style="height: 39px">{{userCredit|number:2}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">号码信用评级</span>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-2 col-sm-6">
+                    <div class="panel bg-info padder-v item">
+                        <div class="h1 text-white h1 m-b-sm" id="zhujiaohaomageshu"  num-move="-" style="height: 39px">{{role}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">风险识别</span>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-2 col-sm-6">
+                    <div class="panel bg-black padder-v item">
+                        <div class="h1 text-white h1 m-b-sm"   num-move="-" style="height: 39px">{{locations}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">号码归属地</span>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-2 col-sm-6">
+                    <div class="panel bg-danger padder-v item">
+                        <div class="h1 text-white h1 m-b-sm"   num-move="-" style="height: 39px">{{callingCount}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">主叫次数</span>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-lg-2 col-sm-6">
+                    <div class="panel bg-success padder-v item">
+                        <div class="h1 text-white h1 m-b-sm" id=""  num-move="-" style="height: 39px">{{averageTime}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">平均通话时长（秒）</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row-fluid">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">通话趋势</div>
+                    <div class="panel-body">
+                        <div data-iu-chart="tonghuaqushiOption" style="height:300px;"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="col-lg-7">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">通话时段分布</div>
+                    <div class="panel-body">
+                        <div data-iu-chart="tonghuashiduanOption" style="height:370px;"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">LAC地区分布</div>
+                    <div class="" id="haomaguishu" style="height:400px;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-l m-r">
+            <div class="panel panel-default">
+                    <div class="panel-heading font-bold">通话详单</div>
+                <div>
+                    <table class="table table-hover ">
+                        <thead>
+                        <tr>
+                            <th>主叫号码</th>
+                            <th>被叫号码</th>
+                            <th>类型</th>
+                            <th>通话时长</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>主叫城市</th>
+                            <th>被叫城市</th>
+                        </tr>
+                        </thead>
+                        <tr ng-show="userTableLength>0" ng-repeat="obj in userTableJson">
+                            <td>{{obj._source.callingNumber}}</td>
+                            <td>{{obj._source.calledNumber}}</td>
+                            <td>{{$scope.typeArr[obj._source.type]}}</td>
+                            <td>{{obj._source.elapsedTime}}</td>
+                            <td>{{obj._source.startTime|date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                            <td>{{obj._source.endTime|date:"yyyy-MM-dd hh:mm:ss"}}</td>
+                            <td>{{obj._source.callingLoc.city}}</td>
+                            <td>{{obj._source.calledLoc.city}}</td>
+                        </tr>
+                    </table>
+                    <div >
+                        <p ng-show="tableloading">加载中</p>
+                        <p ng-show="!userTableLength>0 && !tableloading ">暂无数据</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'echarts/build/dist'
+        }
+    });
+
+    // 使用
+    require(
+            [
+                'echarts',
+                'echarts/chart/pie', // 使用柱状图就加载bar模块，按需加载
+                'echarts/chart/line', // 使用柱状图就加载bar模块，按需加载
+                'echarts/chart/bar', // 使用柱状图就加载bar模块，按需加载
+                'echarts/chart/map' // 使用柱状图就加载bar模块，按需加载
+            ],
+
+            function (ec) {
+
+                //#############
+                // 基于准备好的dom，初始化echarts图表
+//                var myChart_tonghuaqushi = ec.init(document.getElementById('tonghuaqushi'),'macarons');
+//
+//                var option_tonghuaqushi = {
+//
+//                    tooltip: {
+//                        trigger: 'axis'
+//                    },
+//                    calculable: true,
+//                    grid:{
+//                        y:"10%",
+//                        y2:"15%",
+//                        x:"10%",
+//                        x2:"5%"
+//                    },
+//                    xAxis: [
+//                        {
+//                            type: 'category',
+//                            boundaryGap: true,
+//                            data: ['2014-10-01', '2014-10-02', '2014-10-03', '2014-10-04', '2014-10-05', '2014-10-06', '2014-10-07', '2014-10-08', '2014-10-09', '2014-10-10', '2014-10-11', '2014-10-12', '2014-10-13', '2014-10-14', '2014-10-15', '2014-10-16', '2014-10-17', '2014-10-18', '2014-10-19', '2014-10-20', '2014-10-21', '2014-10-22', '2014-10-23', '2014-10-24', '2014-10-25', '2014-10-26', '2014-10-27', '2014-10-28', '2014-10-29', '2014-10-30', '2014-10-31', '2014-11-01', '2014-11-02', '2014-11-03', '2014-11-04', '2014-11-05', '2014-11-06', '2014-11-07', '2014-11-08', '2014-11-09', '2014-11-10', '2014-11-11', '2014-11-12', '2014-11-13', '2014-11-14', '2014-11-15', '2014-11-16', '2014-11-17', '2014-11-18', '2014-11-19', '2014-11-20', '2014-11-21']
+//                        }
+//                    ],
+//                    yAxis: [
+//                        {
+//                            type: 'value'
+//                        }
+//                    ],
+//                    series: [
+//                        {
+//                            name: '通话记录',
+//                            type: 'bar',
+//                            barWidth: '15',
+//                            itemStyle: {
+//                                normal: {
+//                                    color: 'green',
+//                                },
+//                            },
+//
+//                            data: [0, 0, 0, 0, 0, 0, 1, 0, 0, 1600000, 1800000, 160232, 30000, 550000, 30000, 550000, 1600000, 1800000, 160232, 30000, 550000, 1600000, 1800000, 160232, 30000, 550000, 16, 18, 16, 16, 30, 550000, 1600000, 1800000, 160232, 160232, 30000, 550000, 1600000, 1800000, 160232, 600000, 1800000, 160232, 7, 1, 30000, 550000, 30000, 550000, 1600000, 0]
+//                        }
+//                    ]
+//                };
+//                window.onresize=myChart_tonghuaqushi.resize;
+//
+//                myChart_tonghuaqushi.setOption(option_tonghuaqushi);
+
+
+                //##############
+
+
+                //######haomaguishu
+                var myChart_haomaguishu = ec.init(document.getElementById('haomaguishu'));
+                var option_haomaguishu = {
+                    title : {
+                        text: '号码归属地分布',
+                        x:'center',
+                        show:false
+                    },
+                    tooltip : {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        show:false,
+                        orient: 'vertical',
+                        x:'left',
+                        data:['号码归属地']
+                    },
+                    dataRange: {
+                        show:false,
+                        min: 0,
+                        max: 1000000,
+                        x: 'left',
+                        y: 'bottom',
+                        text:['高','低']           // 文本，默认为数值文本
+                    },
+                    toolbox: {
+                        show: false,
+                        orient : 'vertical',
+                        x: 'right',
+                        y: 'center',
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+
+                    series : [
+                        {
+                            name: '号码归属地',
+                            type: 'map',
+                            mapType: 'china',
+                            roam: false,
+                            itemStyle:{
+                                normal:{label:{show:true}},
+                                emphasis:{label:{show:true}}
+                            },
+                            show:false,
+                            data:[
+                                {name: '北京',value: 2401},
+                                {name: '天津',value: 3288},
+                                {name: '上海',value: 4300},
+                                {name: '重庆',value: 500405},
+                                {name: '河北',value: 400387},
+                                {name: '河南',value: 100278},
+                                {name: '云南',value: 755},
+                                {name: '辽宁',value: 200399},
+                                {name: '黑龙江',value: 401023},
+                                {name: '湖南',value: 400488},
+                                {name: '安徽',value: 853},
+                                {name: '山东',value: 300112},
+                                {name: '新疆',value: 320150},
+                                {name: '江苏',value: 244573},
+                                {name: '浙江',value: 201223},
+                                {name: '江西',value: 300078},
+                                {name: '湖北',value: 400442},
+                                {name: '广西',value: 300889},
+                                {name: '甘肃',value: 787},
+                                {name: '山西',value: 400422},
+                                {name: '内蒙古',value: 600110},
+                                {name: '陕西',value: 400230},
+                                {name: '吉林',value: 250156},
+                                {name: '福建',value: 600555},
+                                {name: '贵州',value: 263},
+                                {name: '广东',value: 990922},
+                                {name: '青海',value: 200225},
+                                {name: '西藏',value: 200046},
+                                {name: '四川',value: 9501426},
+                                {name: '宁夏',value: 222},
+                                {name: '海南',value: 336},
+                                {name: '台湾',value: 600023},
+                                {name: '香港',value: 56},
+                                {name: '澳门',value: 88}
+                            ]
+                        }
+                    ]
+                };
+
+
+                window.onresize=myChart_haomaguishu.resize;
+
+                // 为echarts对象加载数据
+                myChart_haomaguishu.setOption(option_haomaguishu);
+
+            }
+    );
+</script>

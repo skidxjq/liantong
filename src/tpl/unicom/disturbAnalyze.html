@@ -1,0 +1,167 @@
+<div class="col" ng-controller="disturbAnalyzeController">
+    <!--<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>-->
+    <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+
+    <div class="wrapper-md">
+
+        <div class="row m-b m-l">
+            <div class="form-group form-horizontal">
+
+                <div class="col-lg-4" style="margin-right:0">
+                    <div class="btn-group">
+
+                        <button class="btn  btn-default" ng-click="queryByTimeRange('today')">今天</button>
+                        <button class="btn  btn-default" ng-click="queryByTimeRange('yesterday')">昨天</button>
+                        <button class="btn  btn-default" ng-click="queryByTimeRange('lastweek')">最近7天</button>
+                        <button class="btn  btn-default" ng-click="queryByTimeRange('lastmonth')">最近30天</button>
+
+                    </div>
+                </div>
+                <div class="col-lg-2" style="margin-left:0">
+                    <p class="input-group form_datetime">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt_min" is-open="minDateOpened" min-date="" max-date="dt_max" datepicker-options="dateOptions" ng-required="true" close-text="Close"  />
+
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="minDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+
+                    </span>
+                    </p>
+                </div>
+                <div class="col-lg-2" style="margin-left:0">
+                    <p class="input-group form_datetime">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt_max" is-open="maxDateOpened" min-date="dt_min" max-date="dt" datepicker-options="dateOptions"  ng-required="true" close-text="Close"  />
+
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="maxDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+
+                    </span>
+                    </p>
+                </div>
+                <div class="col-lg-2" style="margin-left:0">
+
+                    <button type="submit" class="btn  btn-info" ng-click="queryByTimeRange();">提交查询</button>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <!--<div class="row m-l m-r-md">-->
+            <!--<alert  type="info" class="col-lg-5" close="" ng-bind="toas">当前选择日期范围-->
+                <!--<span class="label bg-info">{{minDate|date:"yyyy-MM-dd"}}</span>到-->
+                <!--<span class="label bg-info">{{maxDate|date:"yyyy-MM-dd"}}</span>-->
+               <!--</alert>-->
+
+        <!--</div>-->
+        <div class="row-fluid">
+            <div class="text-center">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="panel bg-danger padder-v item">
+                        <div class="h1 text-white h1 m-b-sm" id=""  num-move="-" style="height: 39px">{{info.disturbRecoCount|number}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">识别骚扰号码个数</span>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6">
+                    <div class="panel bg-black padder-v item">
+                        <div class="h1 text-white h1 m-b-sm"  num-move="-" style="height: 39px">{{info.disturbCallingCount|number}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">骚扰号码通话次数</span>
+
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-4 col-sm-6">
+                    <div class="panel bg-success padder-v item">
+                        <div class="h1 text-white h1 m-b-sm"   num-move="-" style="height: 39px">{{info.disturbTotalTime|number}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">骚扰号码总通话时长</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row-fluid">
+            <div class="col-md-7 " >
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">号码地区分布</div>
+                    <div class="ibox-content">
+                        <div id="districtMap" data-iu-chart="echarts.options.districtMapOption" style="height:620px;"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-5" style="height:400px;" >
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading font-bold">运营商分布</div>
+                        <div class="panel-body">
+                            <div data-iu-chart="echarts.options.serviceProviderOption"  style="height:250px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading font-bold">号码地区分布</div>
+                        <div class="panel-body text-center">
+                            <div data-iu-chart="echarts.options.districtPieOption" style="height:250px;"></div>
+
+                            <!--<div  ui-jq="sparkline" ui-refresh="pieChange" ui-options="{{districtPieData}}, {type:'pie', height:240, sliceColors:['#7266ba','#23b7e5','#27c24c','#fad733','#f05050','#e6f4c1','#d9d6a3','#98b692','#c23b5b','#0f3355']}" class="sparkline inline"></div>-->
+                            <!--<div class="line pull-in"></div>-->
+                            <!--<div class="text-xs" >-->
+                            <!--<kidding ng-repeat="obj in districtPieDataLegend"><i  class="fa fa-circle m-l" style="color:{{obj.color}}"></i>{{obj.term}}-->
+                            <!--</kidding>-->
+                            <!--</div>-->
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row-fluid">
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">通话时段分布</div>
+                    <div class="panel-body">
+                        <div data-iu-chart="echarts.options.periodBarOption"  style="height:250px;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row-fluid">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">通话次数趋势图</div>
+                    <div class="panel-body">
+                        <div data-iu-chart="echarts.options.timeLineOption" style="height:250px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="row-fluid">-->
+            <!--<div class="col-lg-12">-->
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading font-bold">通话次数趋势图-小时</div>-->
+                    <!--<div class="panel-body">-->
+                        <!--<div data-iu-chart="timeLineHourOption" style="height:250px;"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+    </div>
+
+</div>
+

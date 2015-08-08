@@ -1,0 +1,143 @@
+
+<div class="col" ng-controller="overViewController" >
+    <div class="wrapper-md">
+        <div class="row  m-b m-l ">
+            <div class="col-lg-4">
+                <div class="btn-group">
+
+                    <button class="btn  btn-default" ng-click="queryByTimeRange('today')">今天</button>
+                    <button class="btn  btn-default" ng-click="queryByTimeRange('yesterday')">昨天</button>
+                    <button class="btn  btn-default" ng-click="queryByTimeRange('lastweek')">最近7天</button>
+                    <button class="btn  btn-default" ng-click="queryByTimeRange('lastmonth')">最近30天</button>
+
+
+                </div>
+            </div>
+            <div class="col-lg-2" style="margin-left:0">
+                <p class="input-group form_datetime">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt_min" is-open="minDateOpened" min-date="" max-date="dt_max" datepicker-options="dateOptions" ng-required="true" close-text="Close"  />
+
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="minDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+
+                    </span>
+                </p>
+            </div>
+            <div class="col-lg-2" style="margin-left:0">
+                <p class="input-group form_datetime">
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt_max" is-open="maxDateOpened" min-date="dt_min" max-date="dt" datepicker-options="dateOptions"  ng-required="true" close-text="Close"  />
+
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="maxDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+
+                    </span>
+                </p>
+            </div>
+            <div class="col-lg-2" style="margin-left:0">
+
+                <button type="submit" class="btn  btn-info" ng-click="queryByTimeRange();">提交查询</button>
+            </div>
+
+
+        </div>
+        <div class="row-fluid">
+            <div class="text-center">
+
+                <div class="col-lg-2-4 col-sm-6">
+                    <div class="panel bg-primary padder-v item">
+                        <div class="h1 text-white h1 m-b-sm" id="callingCount"  num-move="-" style="height: 39px">{{info.totalCallingCount|number}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">总通话次数</span>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-2-4 col-sm-6">
+                    <div class="panel bg-info padder-v item">
+                        <div class="h1 text-white h1 m-b-sm" id="zhujiaohaomageshu"  num-move="-" style="height: 39px">{{info.callingNum|number}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">主叫号码个数</span>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-2-4 col-sm-6">
+                    <div class="panel bg-black padder-v item">
+                        <div class="h1 text-white h1 m-b-sm" id=""  num-move="-" style="height: 39px">{{info.disturbCount|number}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">骚扰号码识别个数</span>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-2-4 col-sm-6">
+                    <div class="panel bg-danger padder-v item">
+                        <div class="h1 text-white h1 m-b-sm" num-move="-" style="height: 39px">{{info.blackCardCount|number}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">黑卡号码识别个数</span>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-lg-2-4 col-sm-6">
+                    <div class="panel bg-success padder-v item">
+                        <div class="h1 text-white h1 m-b-sm"   num-move="-" style="height: 39px">{{info.cheatCount|number}}</div>  <!--id="totalCount_move"{{totalCount}}-->
+                        <span class="text-white">欺诈电话识别个数</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row-fluid">
+
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">通话次数占比</div>
+                    <div class="panel-body ">
+                        <div data-iu-chart="echarts.options.pieDataOneOption" style="height:250px;"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading font-bold">通话号码占比</div>
+                    <div class="panel-body">
+                        <div data-iu-chart="echarts.options.pieDataTwoOption" style="height:250px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <a ui-sref="app.xifeiAnalyze">
+                        <div class="panel-heading font-bold">通话时长占比</div>
+                        <div class="panel-body text-center">
+                            <div data-iu-chart="echarts.options.pieDataThreeOption" style="height:250px;"></div>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">通话次数趋势图</div>
+                    <div class="panel-body">
+                        <div data-iu-chart="echarts.options.timeLineDataOption" style="height:300px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid" id="testing">
+        </div>
+    </div>
+
+
+
+
+</div>
+

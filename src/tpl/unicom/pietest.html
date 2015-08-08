@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+<div class="col-sm-12" ng-controller="FlotChartDemoCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">
+            Easypiechart
+        </div>
+        <div class="panel-body text-center">
+            <h4>62.5<small> hrs</small></h4>
+            <small class="text-muted block">Updated at 2 minutes ago</small>
+            <div class="inline">
+                <div ui-jq="easyPieChart" ui-options="{
+                      percent: 75,
+                      lineWidth: 10,
+                      trackColor: '{{app.color.light}}',
+                      barColor: '{{app.color.warning}}',
+                      scaleColor: '{{app.color.light}}',
+                      size: 188,
+                      lineCap: 'butt'
+                    }">
+                    <div>
+                        <span class="h2 m-l-sm step">75</span>%
+                        <div class="text text-sm">new</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer"><small>% of avarage rate of the Conversion</small></div>
+    </div>
+</div>
+
+<script>
+    function FlotChartDemoCtrl($scope,$http) {
+        $http.get("http://www.w3cschool.cc/try/angularjs/data/Customers_JSON.php")
+                .success(function(response) {
+                    $scope.names = response;
+                    alert('12345');
+                });
+    }
+</script>
+</body>
+</html>

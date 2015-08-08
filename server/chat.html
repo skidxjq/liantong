@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    message:<input type="text" name="username" id="m"/>
+    <button id="submit">emit</button>
+    <ul id="messages"></ul>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+    var socket=io();
+    $('#submit').bind('click',function(){
+        console.log($('#m').val());
+        socket.emit('chat message', $('#m').val());
+        socket.on('chat message', function(msg){
+            $('#messages').append($('<li>').text(msg));
+        });
+    });
+//    $('form').submit(function(){
+//
+//        $('#m').val('');
+//        return false;
+//    });
+</script>
+
+
+</body>
+</html>

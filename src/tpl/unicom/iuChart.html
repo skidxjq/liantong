@@ -1,0 +1,65 @@
+<style>
+    .iuChart{
+        height:300px
+    }
+</style>
+<div data-ng-controller="ChartController">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{dataOne}}</h5>
+                    <div class="ibox-tools"></div>
+                </div>
+                <div class="ibox-content">
+                    <div data-iu-chart="chartProvinceOption" class="iuChart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>City</h5>
+
+                    <div class="ibox-tools"></div>
+                </div>
+                <div class="ibox-content">
+                    <div data-iu-chart="chartCityOption" class="iuChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>2G</h5>
+
+                    <div class="ibox-tools"></div>
+                </div>
+                <div class="ibox-content">
+                    <div data-iu-chart="chart2GOption" class="iuChart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>3G</h5>
+
+                    <div class="ibox-tools"></div>
+                </div>
+                <div class="ibox-content">
+                    <div data-iu-chart="chart3GOption" class="iuChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div data-iu-chart="districtmapOption" class="iuChart"></div>
+
+
+    </div>
+</div>
+</div>

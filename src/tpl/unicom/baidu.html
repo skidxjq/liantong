@@ -1,0 +1,76 @@
+
+
+<div class="femtocell" >
+
+
+
+    <div class="fmetocellContainer">
+        <div id="femtocellContent" style="display:none;">
+            <svg>实时全国各省市伪基站活动状态图</svg>
+        </div>
+        <div class="data top box left" style="width: 210px;">
+            <a href="#" class="toggle" data-target="#left-table-container">
+                <div class="table-header textLeft">
+                    <h3>
+                        <span class="towerRank"></span>
+                        全国伪基站排名
+                    </h3>
+                </div>
+            </a>
+            <div id="left-table-container" class="overlayDialog table-container">
+                <table id="left-data" border="1" frame="void" rules="rows" summary="全国伪基站实时排名，伪基站短信数量统计排名">
+                    <colgroup>
+                        <col class="bar-col" span="1">
+                        <col class="data-label" span="1">
+                        <col class="total-count" span="1">
+                        <col class="data-label-small" span="1">
+                    </colgroup>
+                </table>
+            </div>
+        </div>
+        <div id="social-icons" class=" right box" >
+            <div class="table-header">
+                <h3>
+                    自 2014-08-20 至今拦截伪基站短信总数
+                </h3>
+            </div>
+            <div id="mes" class=""></div>
+        </div>
+
+        <div id="console" class="box right">
+            <div id="console-table-container" class="overlayDialog">
+                <table id="events-data" summary="实时伪基站短信展示，短信内容及发送号码曝光">
+                    <colgroup class="second-level">
+                        <col class="location-col" span="1">
+                    </colgroup>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div id="message-panel" class="data box" style="display:none">
+        <div class="table-header blue-grad">
+            <h3>提示框</h3>
+        </div>
+        <div id="message-container" class="black-solid table-container">
+            <span id="message-text"></span>
+            <button id="close-button" class="blue-grad" onclick="hideMessage();">关闭</button>
+        </div>
+    </div>
+
+
+    <!--[if lt IE 9]><script src="vendor/static/js/H5.js"></script> <![endif]-->
+    <!--[if gt IE 9]><script type="text/javascript" name="baidu-tc-cerfication" src="http://apps.bdimg.com/cloudaapi/lightapp.js#27f5c4b5848cda6f14274e5586d4bf0d"></script><![endif]-->
+    <!--[if !IE]><!--><script type="text/javascript" name="baidu-tc-cerfication" src="http://apps.bdimg.com/cloudaapi/lightapp.js#27f5c4b5848cda6f14274e5586d4bf0d"></script><!--<![endif]-->
+    <link rel="stylesheet" type="text/css" href="vendor/static/official_pc/css/base_new.css">
+    <link rel="stylesheet" type="text/css" href="vendor/static/femtocell/css/femtocellForTemplate.min.css?v=v2.6.4">
+
+    <script src="vendor/static/official_pc/js/base_new.js"></script>
+
+    <script type="text/javascript" src="vendor/static/femtocell/js/d3.v3.min.js"></script>
+    <script type="text/javascript" src="vendor/static/femtocell/js/queue.v1.min.js"></script>
+    <script type="text/javascript" src="vendor/static/femtocell/js/femtocellForTemplate.min.js"></script>
+
+
+
+</div>
