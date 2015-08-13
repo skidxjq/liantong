@@ -1,36 +1,81 @@
 /**
  * Created by mac on 15-6-30.
  */
-var mongoose = require( 'mongoose' );
-var userlist     = mongoose.model( 'ring_stat' );
-//var userlist     = mongoose.model( 'userlist' );
-var count=5;
+var mongoose        =   require( 'mongoose' );
+var userlist        =   mongoose.model( 'ring_stat' );
+var overviewUtil    =   require('../utils/overview');
+var config          =   require('../config');
 
-exports.testPage=function(req,res,next){
-    res.send("1000");
-}
 
-exports.getUserListByPage=function(req,res,next){
-    var page=req.params.page;
-    userlist.find({}).
-        skip(page*count).
-        limit(count).
-        exec(function(err,docs){
-            //mydocs=docs;
-            //console.log(mydocs);
-            console.log(docs);
-            res.send(docs);
-        })
+//获取五个info
+exports.getOverviewInfo=function (req, res, next){
+
+    var obj = setOverviewInfo(res);
+    console.log(obj);
+    //res.send(obj);
+
+};
+
+exports.getPieData = function (req, res, next){
+
+
+};
+
+function setOverviewInfo(res){
+    var obj={},pieObj=[];
+
+    //主叫号码个数
+    overviewUtil.getCountByCondition({"callingCount" : {$gt : 0}}).then(
+        function (result){
+            console.log(typeof result);
+            console.log(result);
+            obj["callingCount"] = parseInt (result);
+            pieObj.push({name:config.legend[0],value:obj["callingCount"]});
+        } ,
+        function (err){
+
+        }
+    ).then(
+
+    //骚扰号码个数
+    overviewUtil.getCountByCondition({role:1}).then(
+        function (result){
+            console.log (result);
+            obj["disturbCount"] = parseInt (result);
+            pieObj.push({name:config.legend[1],value:obj["disturbCount"]});
+
+        } ,
+        function(err){
+
+        }
+    )).then(
+
+    //黑卡识别个数
+    overviewUtil.getCountByCondition({role:2}).then(
+        function (result){
+            console.log (result);
+            obj["blackCardCount"] = parseInt (result);
+            pieObj.push({name:config.legend[2],value:obj["blackCardCount"]});
+
+        } ,
+        function(err){
+
+        }
+    )).then(
+
+    //骚扰电话识别个数
+    overviewUtil.getCountByCondition({role:3}).then(
+        function (result){
+            console.log (result);
+            obj["cheatCount"] = parseInt (result);
+            pieObj.push({name:config.legend[3],value:obj["cheatCount"]});
+            res.json({"overviewInfo":obj,"pieDataTwo":pieObj});
+        } ,
+        function(err){
+
+        }
+    ));
 };
 
 
-exports.getUserListCount=function(req,res,next){
-    //userlist.find({})
-    //    .exec(function(err,docs){
-    //        console.log(docs);
-    //            //res.send(docs.length);
-    //        });
-    userlist.count({},function(err,docs){
-        console.log(docs);
-    })
-};
+

@@ -1,5 +1,5 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'socket-io', '--save' ]
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'eventproxy', '--save' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.34
 4 warn package.json liantong@1.0.0 No repository field.
@@ -9,8 +9,8 @@
 8 warn package.json http@0.0.0 No repository field.
 9 warn package.json querystring@0.2.0 querystring is also the name of a node core module.
 10 verbose readDependencies using package.json deps
-11 verbose cache add [ 'socket-io', null ]
-12 verbose cache add name=undefined spec="socket-io" args=["socket-io",null]
+11 verbose cache add [ 'eventproxy', null ]
+12 verbose cache add name=undefined spec="eventproxy" args=["eventproxy",null]
 13 verbose parsed url { protocol: null,
 13 verbose parsed url   slashes: null,
 13 verbose parsed url   auth: null,
@@ -20,69 +20,97 @@
 13 verbose parsed url   hash: null,
 13 verbose parsed url   search: null,
 13 verbose parsed url   query: null,
-13 verbose parsed url   pathname: 'socket-io',
-13 verbose parsed url   path: 'socket-io',
-13 verbose parsed url   href: 'socket-io' }
-14 silly lockFile 2c2f14e9-socket-io socket-io
-15 verbose lock socket-io /Users/mac/.npm/2c2f14e9-socket-io.lock
-16 silly lockFile 2c2f14e9-socket-io socket-io
-17 silly lockFile 2c2f14e9-socket-io socket-io
-18 verbose addNamed [ 'socket-io', '' ]
+13 verbose parsed url   pathname: 'eventproxy',
+13 verbose parsed url   path: 'eventproxy',
+13 verbose parsed url   href: 'eventproxy' }
+14 silly lockFile ab500697-eventproxy eventproxy
+15 verbose lock eventproxy /Users/mac/.npm/ab500697-eventproxy.lock
+16 silly lockFile ab500697-eventproxy eventproxy
+17 silly lockFile ab500697-eventproxy eventproxy
+18 verbose addNamed [ 'eventproxy', '' ]
 19 verbose addNamed [ null, '*' ]
-20 silly lockFile d2f5c91d-socket-io socket-io@
-21 verbose lock socket-io@ /Users/mac/.npm/d2f5c91d-socket-io.lock
-22 silly addNameRange { name: 'socket-io', range: '*', hasData: false }
-23 verbose request where is /socket-io
+20 silly lockFile c271d616-eventproxy eventproxy@
+21 verbose lock eventproxy@ /Users/mac/.npm/c271d616-eventproxy.lock
+22 silly addNameRange { name: 'eventproxy', range: '*', hasData: false }
+23 verbose request where is /eventproxy
 24 verbose request registry https://registry.npmjs.org/
-25 verbose request id 12330d82909db8f4
-26 verbose url raw /socket-io
-27 verbose url resolving [ 'https://registry.npmjs.org/', './socket-io' ]
-28 verbose url resolved https://registry.npmjs.org/socket-io
-29 verbose request where is https://registry.npmjs.org/socket-io
-30 info trying registry request attempt 1 at 16:33:25
-31 http GET https://registry.npmjs.org/socket-io
-32 http 404 https://registry.npmjs.org/socket-io
-33 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-33 verbose headers   'content-type': 'application/json',
-33 verbose headers   'cache-control': 'max-age=0',
-33 verbose headers   'content-length': '51',
-33 verbose headers   'accept-ranges': 'bytes',
-33 verbose headers   date: 'Fri, 24 Jul 2015 08:33:26 GMT',
-33 verbose headers   via: '1.1 varnish',
-33 verbose headers   age: '0',
-33 verbose headers   connection: 'keep-alive',
-33 verbose headers   'x-served-by': 'cache-nrt6130-NRT',
-33 verbose headers   'x-cache': 'MISS',
-33 verbose headers   'x-cache-hits': '0',
-33 verbose headers   'x-timer': 'S1437726805.753343,VS0,VE451' }
-34 silly registry.get cb [ 404,
+25 verbose request id 9ad175f41eb6d3c9
+26 verbose url raw /eventproxy
+27 verbose url resolving [ 'https://registry.npmjs.org/', './eventproxy' ]
+28 verbose url resolved https://registry.npmjs.org/eventproxy
+29 verbose request where is https://registry.npmjs.org/eventproxy
+30 info trying registry request attempt 1 at 13:00:15
+31 verbose etag "86LG017EQF5BPLWTKAZHND3BV"
+32 http GET https://registry.npmjs.org/eventproxy
+33 http 200 https://registry.npmjs.org/eventproxy
+34 silly registry.get cb [ 200,
 34 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+34 silly registry.get     etag: '"EP791P58ISN4J9D6C9WL29NS8"',
 34 silly registry.get     'content-type': 'application/json',
-34 silly registry.get     'cache-control': 'max-age=0',
-34 silly registry.get     'content-length': '51',
+34 silly registry.get     'cache-control': 'max-age=60',
+34 silly registry.get     'content-length': '40083',
 34 silly registry.get     'accept-ranges': 'bytes',
-34 silly registry.get     date: 'Fri, 24 Jul 2015 08:33:26 GMT',
+34 silly registry.get     date: 'Thu, 13 Aug 2015 05:00:16 GMT',
 34 silly registry.get     via: '1.1 varnish',
 34 silly registry.get     age: '0',
 34 silly registry.get     connection: 'keep-alive',
-34 silly registry.get     'x-served-by': 'cache-nrt6130-NRT',
+34 silly registry.get     'x-served-by': 'cache-nrt6127-NRT',
 34 silly registry.get     'x-cache': 'MISS',
 34 silly registry.get     'x-cache-hits': '0',
-34 silly registry.get     'x-timer': 'S1437726805.753343,VS0,VE451' } ]
-35 silly lockFile d2f5c91d-socket-io socket-io@
-36 silly lockFile d2f5c91d-socket-io socket-io@
-37 error 404 404 Not Found: socket-io
-37 error 404
-37 error 404 'socket-io' is not in the npm registry.
-37 error 404 You should bug the author to publish it
-37 error 404 It was specified as a dependency of 'liantong'
-37 error 404
-37 error 404 Note that you can also install from a
-37 error 404 tarball, folder, or http url, or git url.
-38 error System Darwin 13.4.0
-39 error command "node" "/usr/local/bin/npm" "install" "socket-io" "--save"
-40 error cwd /Users/mac/skidxjq/1/server
-41 error node -v v0.10.34
-42 error npm -v 1.4.28
-43 error code E404
-44 verbose exit [ 1, true ]
+34 silly registry.get     'x-timer': 'S1439442015.980104,VS0,VE700',
+34 silly registry.get     vary: 'Accept' } ]
+35 silly addNameRange number 2 { name: 'eventproxy', range: '*', hasData: true }
+36 silly addNameRange versions [ 'eventproxy',
+36 silly addNameRange   [ '0.1.0',
+36 silly addNameRange     '0.1.1',
+36 silly addNameRange     '0.1.2',
+36 silly addNameRange     '0.1.3',
+36 silly addNameRange     '0.1.4',
+36 silly addNameRange     '0.2.0',
+36 silly addNameRange     '0.2.1',
+36 silly addNameRange     '0.2.2',
+36 silly addNameRange     '0.2.3',
+36 silly addNameRange     '0.2.4',
+36 silly addNameRange     '0.2.5',
+36 silly addNameRange     '0.2.6',
+36 silly addNameRange     '0.2.7',
+36 silly addNameRange     '0.3.0',
+36 silly addNameRange     '0.3.1',
+36 silly addNameRange     '0.3.2',
+36 silly addNameRange     '0.3.3',
+36 silly addNameRange     '0.3.4' ] ]
+37 verbose addNamed [ 'eventproxy', '0.3.4' ]
+38 verbose addNamed [ '0.3.4', '0.3.4' ]
+39 silly lockFile 7c6f524c-eventproxy-0-3-4 eventproxy@0.3.4
+40 verbose lock eventproxy@0.3.4 /Users/mac/.npm/7c6f524c-eventproxy-0-3-4.lock
+41 silly lockFile 371ff1e1--eventproxy-eventproxy-0-3-4-tgz https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
+42 verbose lock https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz /Users/mac/.npm/371ff1e1--eventproxy-eventproxy-0-3-4-tgz.lock
+43 verbose addRemoteTarball [ 'https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz',
+43 verbose addRemoteTarball   'f71964ed73c6dedc1ada72147808ccbc418cbbe1' ]
+44 info retry fetch attempt 1 at 13:00:17
+45 verbose fetch to= /var/folders/q7/gm48tyl97xl5xpg1gsns4x740000gn/T/npm-61803-4YbL2k9y/registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
+46 http GET https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
+47 http 200 https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
+48 silly lockFile 371ff1e1--eventproxy-eventproxy-0-3-4-tgz https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
+49 silly lockFile 371ff1e1--eventproxy-eventproxy-0-3-4-tgz https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
+50 silly lockFile 7c6f524c-eventproxy-0-3-4 eventproxy@0.3.4
+51 silly lockFile 7c6f524c-eventproxy-0-3-4 eventproxy@0.3.4
+52 silly lockFile c271d616-eventproxy eventproxy@
+53 silly lockFile c271d616-eventproxy eventproxy@
+54 error Error: EACCES, mkdir '/Users/mac/.npm/eventproxy/0.3.4'
+54 error  { [Error: EACCES, mkdir '/Users/mac/.npm/eventproxy/0.3.4']
+54 error   errno: 3,
+54 error   code: 'EACCES',
+54 error   path: '/Users/mac/.npm/eventproxy/0.3.4',
+54 error   parent: 'liantong' }
+55 error Please try running this command again as root/Administrator.
+56 error System Darwin 13.4.0
+57 error command "node" "/usr/local/bin/npm" "install" "eventproxy" "--save"
+58 error cwd /Users/mac/skidxjq/1/server
+59 error node -v v0.10.34
+60 error npm -v 1.4.28
+61 error path /Users/mac/.npm/eventproxy/0.3.4
+62 error code EACCES
+63 error errno 3
+64 error stack Error: EACCES, mkdir '/Users/mac/.npm/eventproxy/0.3.4'
+65 verbose exit [ 3, true ]

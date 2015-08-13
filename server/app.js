@@ -16,11 +16,9 @@ var routes ={
 };
 
 
-/**
+/*
  *设置跨域访问
  */
-
-
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -29,10 +27,15 @@ app.all('*', function(req, res, next) {
     next();
 });
 
+//user list
+app.get('/users/getUserList/:page' , routes.users.getUserListByPage);
+app.get('/users/getUsersSum' , routes.users.getUsersSum);
+app.get('/users/insertMock' , routes.users.insertMock);
 
-app.get('/users/getUserList/:page',routes.users.getUserListByPage);
-app.get('/users/getUsersSum',routes.users.getUsersSum);
-app.get('/users/insertMock',routes.users.insertMock);
+//overview page
+app.get('/overview/getOverviewInfo' ,   routes.overview.getOverviewInfo);
+
+
 //app.get('/getlistByPage/:page',routes.overview.getUserListByPage);
 //
 //app.get('/getUserListCount',routes.overview.getUserListCount);

@@ -20,7 +20,8 @@ exports.getUserListByPage=function(req,res,next){
 };
 
 //获取总条数
-exports.getUsersSum=function(req,res,next){
+exports.getUsersSum=function(req, res, next){
+
     userlist.count({"role":0},function(err,docs){
         console.dir(docs);
         var num=parseInt(docs);
@@ -31,28 +32,29 @@ exports.getUsersSum=function(req,res,next){
 
 //插入模拟数据
 exports.insertMock=function(req,res,next){
-    var data_json={
-        "_class" : "cn.com.cetc.antifraud.object.RingStat",
-        "number" : "0012088501581",
-        "callingCount" :  Math.random()*10,
-        "calledCount" :  Math.random()*10,
-        "totalElapsed" :  Math.random()*2000,
-        "onlineTime" :  Math.random()*10,
-        "calledNumber" :  Math.random()*10,
-        "isConflict" : Math.random()*10,
-        "role" : 0,
-        "avgElapsed" : Math.random()*100,
-        "inoutRatio" : 0,
-        "repeatRatio" : Math.random(),
-        "onlineRatio" : 0,
-        "avgCallingPerHour" : 0,
-        "timestamp" :  1436708060476,
-        "relationship" : [
-            "0012088597923"
-        ]
-    };
-    var data_arr=[];
+
+    var data_arr=[], data_json;
     for(var i=0;i<200;i++){
+        data_json={
+            "_class" : "cn.com.cetc.antifraud.object.RingStat",
+            "number" : "0012088501581",
+            "callingCount" :  Math.random()*10,
+            "calledCount" :  Math.random()*10,
+            "totalElapsed" :  Math.random()*2000,
+            "onlineTime" :  Math.random()*10,
+            "calledNumber" :  Math.random()*10,
+            "isConflict" : Math.random()*10,
+            "role" : (Math.random()*4).toFixed(0),
+            "avgElapsed" : Math.random()*100,
+            "inoutRatio" : 0,
+            "repeatRatio" : Math.random(),
+            "onlineRatio" : 0,
+            "avgCallingPerHour" : 0,
+            "timestamp" :  1436708060476,
+            "relationship" : [
+                "0012088597923"
+            ]
+        };
         data_arr.push(data_json);
     }
 
