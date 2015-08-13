@@ -1,6 +1,9 @@
 logs/*
 !.gitkeep
 node_modules/
+Angular-Paging/
+
+.svn/
 an-datatables/
 angela/
 echarts/

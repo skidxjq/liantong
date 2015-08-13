@@ -43,7 +43,7 @@ app.controller('overViewController', ['$scope', '$http','$localStorage', '$timeo
     };
     $scope.info={
         "totalCallingCount":"", //总通话次数
-        "callingNum":"",//主叫号码个数
+        "callingCount":"",//主叫号码个数
         "disturbCount":"", //骚扰电话个数
         "blackCardCount":"", //黑卡识别个数
         "cheatCount":""//欺诈个数
@@ -81,40 +81,31 @@ app.controller('overViewController', ['$scope', '$http','$localStorage', '$timeo
 
     //饼图的legend对应
     var $pieLegend=["正常","骚扰电话","高吸费电话","黑卡"];
-    $scope.getCallCount=function(){
-        $http.post($scope.requestUrl,{"facets":{"stats":{"statistical":{"field":"role"},"facet_filter":{"fquery":{"query":{"filtered":{"query":{"bool":{"should":[{"query_string":{"query":"_type:ring-log"}}]}},"filter":{"bool":{"must":$scope.timeRangeStr}}}}}}},"stats__type:ring-log":{"statistical":{"field":"role"},"facet_filter":{"fquery":{"query":{"filtered":{"query":{"bool":{"should":[{"query_string":{"query":"_type:ring-log"}}]}},"filter":{"bool":{"must":$scope.timeRangeStr}}}}}}}},"size":0}).success(function(response){
-            var $countJson=eval(response);
-            $scope.info.totalCallingCount=$countJson.facets.stats.count;
 
 
-        })
-    }
 
-    $scope.getCallingNum=function(){
-        $http.post($scope.requestUrl,{"facets":{"stats":{"statistical":{"field":"callingCount"},"facet_filter":{"fquery":{"query":{"filtered":{"query":{"bool":{"should":[{"query_string":{"query":"_type:ring-stat"}}]}},"filter":{"bool":{"must":$scope.timeRangeStr}}}}}}},"stats__type:ring-stat":{"statistical":{"field":"callingCount"},"facet_filter":{"fquery":{"query":{"filtered":{"query":{"bool":{"should":[{"query_string":{"query":"_type:ring-stat"}}]}},"filter":{"bool":{"must":$scope.timeRangeStr}}}}}}}},"size":0}).success(function(response){
-            $scope.countJson=eval(response);
-            $scope.info.callingNum=$scope.countJson.facets.stats.count;
-        })
-    }
-    $scope.getDisturbCount=function(){
-        $http.post($scope.requestUrl,{"facets":{"stats":{"statistical":{"field":"role"},"facet_filter":{"fquery":{"query":{"filtered":{"query":{"bool":{"should":[{"query_string":{"query":"ring-stat.role:\"1\""}}]}},"filter":{"bool":{"must":$scope.timeRangeStr}}}}}}},"stats_ring-stat.role:\"1\"":{"statistical":{"field":"role"},"facet_filter":{"fquery":{"query":{"filtered":{"query":{"bool":{"should":[{"query_string":{"query":"ring-stat.role:\"1\""}}]}},"filter":{"bool":{"must":$scope.timeRangeStr}}}}}}}},"size":0}).success(function(response){
-            var $countJson=eval(response);
-            $scope.info.disturbCount=$countJson.facets.stats.count;
-        })
-    }
-    $scope.getBlackCardCount=function(){
-        $http.post($scope.requestUrl,{"facets":{"stats":{"statistical":{"field":"role"},"facet_filter":{"fquery":{"query":{"filtered":{"query":{"bool":{"should":[{"query_string":{"query":"ring-log.role:\"2\""}}]}},"filter":{"bool":{"must":$scope.timeRangeStr}}}}}}},"stats_ring-log.role:\"2\"":{"statistical":{"field":"role"},"facet_filter":{"fquery":{"query":{"filtered":{"query":{"bool":{"should":[{"query_string":{"query":"ring-log.role:\"2\""}}]}},"filter":{"bool":{"must":$scope.timeRangeStr}}}}}}}},"size":0}).success(function(response){
-            var $countJson=eval(response);
-            $scope.info.blackCardCount=$countJson.facets.stats.count;
-        })
-    }
+    /*
+    * 以下为获取五个info
+    * */
+    $scope.getOverviewInfo=function(){
+        $http.get($scope.serverUrl+"/overview/getoverviewinfo")
+            .success(function(response){
 
-    $scope.getCheatCount=function(){
-        $http.post($scope.requestUrl,{"facets":{"stats":{"statistical":{"field":"role"},"facet_filter":{"fquery":{"query":{"filtered":{"query":{"bool":{"should":[{"query_string":{"query":"ring-log.role:\"3\""}}]}},"filter":{"bool":{"must":$scope.timeRangeStr}}}}}}},"stats_ring-log.role:\"3\"":{"statistical":{"field":"role"},"facet_filter":{"fquery":{"query":{"filtered":{"query":{"bool":{"should":[{"query_string":{"query":"ring-log.role:\"3\""}}]}},"filter":{"bool":{"must":$scope.timeRangeStr}}}}}}}},"size":0}).success(function(response){
-            var $countJson=eval(response);
-            $scope.info.cheatCount=$countJson.facets.stats.count;
-        })
-    }
+                
+                //五个info数字
+                $scope.info = response['overviewInfo'];
+
+                //画图
+                $scope.echarts.options.pieDataTwoOption.series[0].data = response['pieDataTwo'];
+                $scope.echarts.options.pieDataTwoOption.version++;
+                console.log($scope.echarts.options);
+            });
+    };
+    /*
+    * 结束
+    * */
+
+
     $scope.getPieDataOne=function(){
         $scope.pieDataOneApi?$scope.pieDataOneApi.showLoading("正在加载中"):"";
 
@@ -127,7 +118,7 @@ app.controller('overViewController', ['$scope', '$http','$localStorage', '$timeo
             }
             $scope.echarts.options.pieDataOneOption.version++;
         })
-    }
+    };
 
     $scope.getPieDataTwo=function(){
         $scope.data.pieDataTwoApi?$scope.data.pieDataTwoApi.showLoading("正在加载中"):"";
@@ -220,11 +211,13 @@ app.controller('overViewController', ['$scope', '$http','$localStorage', '$timeo
     };
 
     $scope.repaint=function(){
-        $scope.getCallCount();
-        $scope.getCallingNum();
-        $scope.getDisturbCount();
-        $scope.getBlackCardCount();
-        $scope.getCheatCount();
+
+        $scope.getOverviewInfo();
+        //$scope.getCallCount();
+        //$scope.getCallingNum();
+        //$scope.getDisturbCount();
+        //$scope.getBlackCardCount();
+        //$scope.getCheatCount();
         $scope.getPieDataOne();
         $scope.getPieDataTwo();
         $scope.getPieDataThree();
