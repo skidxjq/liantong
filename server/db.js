@@ -30,28 +30,22 @@ var user = new Schema({
     "avgCallingPerHour" :  Number,
     "timestamp"     :   Number,
     "relationship"  :   Array
-    //
-    //"_class" : "cn.com.cetc.antifraud.object.RingStat",
-    //"number" : "0012088501581",
-    //"callingCount" :  3,
-    //"calledCount" :  0,
-    //"totalElapsed" :  2832,
-    //"onlineTime" :  0,
-    //"calledNumber" :  1,
-    //"isConflict" : 0,
-    //"role" : 0,
-    //"avgElapsed" : 944,
-    //"inoutRatio" : 0,
-    //"repeatRatio" : 0.3333333432674408,
-    //"onlineRatio" : 0,
-    //"avgCallingPerHour" : 0,
-    //"timestamp" :  1436708060476,
-    //"relationship" : [
-    //    "0012088597923"
-    //]
+
+});
+
+var admin = new mongoose.Schema({
+    username: String,
+    password: String,
+    email : String,
+    level : Number,
+    dateTime: Date
+    //salt: String,
+    //hash: String
 });
 
 mongoose.model( 'ring_stat', user );
+mongoose.model( 'admin', admin );
+
 var hostUrl = 'mongodb://' + config.hostUrl + ':' + config.port + '/' + config.sets;
 console.log(hostUrl);
 mongoose.connect( hostUrl);

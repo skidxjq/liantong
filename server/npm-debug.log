@@ -1,116 +1,134 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'eventproxy', '--save' ]
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'moment', '--save' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.34
 4 warn package.json liantong@1.0.0 No repository field.
 5 warn package.json liantong@1.0.0 No README data
-6 warn package.json http@0.0.0 http is also the name of a node core module.
-7 warn package.json http@0.0.0 No description
-8 warn package.json http@0.0.0 No repository field.
-9 warn package.json querystring@0.2.0 querystring is also the name of a node core module.
-10 verbose readDependencies using package.json deps
-11 verbose cache add [ 'eventproxy', null ]
-12 verbose cache add name=undefined spec="eventproxy" args=["eventproxy",null]
-13 verbose parsed url { protocol: null,
-13 verbose parsed url   slashes: null,
-13 verbose parsed url   auth: null,
-13 verbose parsed url   host: null,
-13 verbose parsed url   port: null,
-13 verbose parsed url   hostname: null,
-13 verbose parsed url   hash: null,
-13 verbose parsed url   search: null,
-13 verbose parsed url   query: null,
-13 verbose parsed url   pathname: 'eventproxy',
-13 verbose parsed url   path: 'eventproxy',
-13 verbose parsed url   href: 'eventproxy' }
-14 silly lockFile ab500697-eventproxy eventproxy
-15 verbose lock eventproxy /Users/mac/.npm/ab500697-eventproxy.lock
-16 silly lockFile ab500697-eventproxy eventproxy
-17 silly lockFile ab500697-eventproxy eventproxy
-18 verbose addNamed [ 'eventproxy', '' ]
-19 verbose addNamed [ null, '*' ]
-20 silly lockFile c271d616-eventproxy eventproxy@
-21 verbose lock eventproxy@ /Users/mac/.npm/c271d616-eventproxy.lock
-22 silly addNameRange { name: 'eventproxy', range: '*', hasData: false }
-23 verbose request where is /eventproxy
-24 verbose request registry https://registry.npmjs.org/
-25 verbose request id 9ad175f41eb6d3c9
-26 verbose url raw /eventproxy
-27 verbose url resolving [ 'https://registry.npmjs.org/', './eventproxy' ]
-28 verbose url resolved https://registry.npmjs.org/eventproxy
-29 verbose request where is https://registry.npmjs.org/eventproxy
-30 info trying registry request attempt 1 at 13:00:15
-31 verbose etag "86LG017EQF5BPLWTKAZHND3BV"
-32 http GET https://registry.npmjs.org/eventproxy
-33 http 200 https://registry.npmjs.org/eventproxy
-34 silly registry.get cb [ 200,
-34 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-34 silly registry.get     etag: '"EP791P58ISN4J9D6C9WL29NS8"',
-34 silly registry.get     'content-type': 'application/json',
-34 silly registry.get     'cache-control': 'max-age=60',
-34 silly registry.get     'content-length': '40083',
-34 silly registry.get     'accept-ranges': 'bytes',
-34 silly registry.get     date: 'Thu, 13 Aug 2015 05:00:16 GMT',
-34 silly registry.get     via: '1.1 varnish',
-34 silly registry.get     age: '0',
-34 silly registry.get     connection: 'keep-alive',
-34 silly registry.get     'x-served-by': 'cache-nrt6127-NRT',
-34 silly registry.get     'x-cache': 'MISS',
-34 silly registry.get     'x-cache-hits': '0',
-34 silly registry.get     'x-timer': 'S1439442015.980104,VS0,VE700',
-34 silly registry.get     vary: 'Accept' } ]
-35 silly addNameRange number 2 { name: 'eventproxy', range: '*', hasData: true }
-36 silly addNameRange versions [ 'eventproxy',
-36 silly addNameRange   [ '0.1.0',
-36 silly addNameRange     '0.1.1',
-36 silly addNameRange     '0.1.2',
-36 silly addNameRange     '0.1.3',
-36 silly addNameRange     '0.1.4',
-36 silly addNameRange     '0.2.0',
-36 silly addNameRange     '0.2.1',
-36 silly addNameRange     '0.2.2',
-36 silly addNameRange     '0.2.3',
-36 silly addNameRange     '0.2.4',
-36 silly addNameRange     '0.2.5',
-36 silly addNameRange     '0.2.6',
-36 silly addNameRange     '0.2.7',
-36 silly addNameRange     '0.3.0',
-36 silly addNameRange     '0.3.1',
-36 silly addNameRange     '0.3.2',
-36 silly addNameRange     '0.3.3',
-36 silly addNameRange     '0.3.4' ] ]
-37 verbose addNamed [ 'eventproxy', '0.3.4' ]
-38 verbose addNamed [ '0.3.4', '0.3.4' ]
-39 silly lockFile 7c6f524c-eventproxy-0-3-4 eventproxy@0.3.4
-40 verbose lock eventproxy@0.3.4 /Users/mac/.npm/7c6f524c-eventproxy-0-3-4.lock
-41 silly lockFile 371ff1e1--eventproxy-eventproxy-0-3-4-tgz https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
-42 verbose lock https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz /Users/mac/.npm/371ff1e1--eventproxy-eventproxy-0-3-4-tgz.lock
-43 verbose addRemoteTarball [ 'https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz',
-43 verbose addRemoteTarball   'f71964ed73c6dedc1ada72147808ccbc418cbbe1' ]
-44 info retry fetch attempt 1 at 13:00:17
-45 verbose fetch to= /var/folders/q7/gm48tyl97xl5xpg1gsns4x740000gn/T/npm-61803-4YbL2k9y/registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
-46 http GET https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
-47 http 200 https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
-48 silly lockFile 371ff1e1--eventproxy-eventproxy-0-3-4-tgz https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
-49 silly lockFile 371ff1e1--eventproxy-eventproxy-0-3-4-tgz https://registry.npmjs.org/eventproxy/-/eventproxy-0.3.4.tgz
-50 silly lockFile 7c6f524c-eventproxy-0-3-4 eventproxy@0.3.4
-51 silly lockFile 7c6f524c-eventproxy-0-3-4 eventproxy@0.3.4
-52 silly lockFile c271d616-eventproxy eventproxy@
-53 silly lockFile c271d616-eventproxy eventproxy@
-54 error Error: EACCES, mkdir '/Users/mac/.npm/eventproxy/0.3.4'
-54 error  { [Error: EACCES, mkdir '/Users/mac/.npm/eventproxy/0.3.4']
-54 error   errno: 3,
-54 error   code: 'EACCES',
-54 error   path: '/Users/mac/.npm/eventproxy/0.3.4',
-54 error   parent: 'liantong' }
-55 error Please try running this command again as root/Administrator.
-56 error System Darwin 13.4.0
-57 error command "node" "/usr/local/bin/npm" "install" "eventproxy" "--save"
-58 error cwd /Users/mac/skidxjq/1/server
-59 error node -v v0.10.34
-60 error npm -v 1.4.28
-61 error path /Users/mac/.npm/eventproxy/0.3.4
-62 error code EACCES
-63 error errno 3
-64 error stack Error: EACCES, mkdir '/Users/mac/.npm/eventproxy/0.3.4'
-65 verbose exit [ 3, true ]
+6 warn package.json crypto@0.0.3 crypto is also the name of a node core module.
+7 warn package.json http@0.0.0 http is also the name of a node core module.
+8 warn package.json http@0.0.0 No description
+9 warn package.json http@0.0.0 No repository field.
+10 warn package.json querystring@0.2.0 querystring is also the name of a node core module.
+11 verbose readDependencies using package.json deps
+12 verbose cache add [ 'moment', null ]
+13 verbose cache add name=undefined spec="moment" args=["moment",null]
+14 verbose parsed url { protocol: null,
+14 verbose parsed url   slashes: null,
+14 verbose parsed url   auth: null,
+14 verbose parsed url   host: null,
+14 verbose parsed url   port: null,
+14 verbose parsed url   hostname: null,
+14 verbose parsed url   hash: null,
+14 verbose parsed url   search: null,
+14 verbose parsed url   query: null,
+14 verbose parsed url   pathname: 'moment',
+14 verbose parsed url   path: 'moment',
+14 verbose parsed url   href: 'moment' }
+15 silly lockFile b56def36-moment moment
+16 verbose lock moment /Users/mac/.npm/b56def36-moment.lock
+17 silly lockFile b56def36-moment moment
+18 silly lockFile b56def36-moment moment
+19 verbose addNamed [ 'moment', '' ]
+20 verbose addNamed [ null, '*' ]
+21 silly lockFile 42aa250a-moment moment@
+22 verbose lock moment@ /Users/mac/.npm/42aa250a-moment.lock
+23 silly addNameRange { name: 'moment', range: '*', hasData: false }
+24 verbose request where is /moment
+25 verbose request registry https://registry.npmjs.org/
+26 verbose request id 7963907e6ece2723
+27 verbose url raw /moment
+28 verbose url resolving [ 'https://registry.npmjs.org/', './moment' ]
+29 verbose url resolved https://registry.npmjs.org/moment
+30 verbose request where is https://registry.npmjs.org/moment
+31 info trying registry request attempt 1 at 16:32:06
+32 verbose etag "6B4KXPNFS9P59ZD2WD1R8JDK4"
+33 http GET https://registry.npmjs.org/moment
+34 http 200 https://registry.npmjs.org/moment
+35 silly registry.get cb [ 200,
+35 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+35 silly registry.get     etag: '"5UPJ4K704XTPH437LOKXN97OD"',
+35 silly registry.get     'content-type': 'application/json',
+35 silly registry.get     'cache-control': 'max-age=60',
+35 silly registry.get     'content-length': '65591',
+35 silly registry.get     'accept-ranges': 'bytes',
+35 silly registry.get     date: 'Tue, 01 Sep 2015 08:32:29 GMT',
+35 silly registry.get     via: '1.1 varnish',
+35 silly registry.get     age: '28',
+35 silly registry.get     connection: 'keep-alive',
+35 silly registry.get     'x-served-by': 'cache-nrt6121-NRT',
+35 silly registry.get     'x-cache': 'HIT',
+35 silly registry.get     'x-cache-hits': '1',
+35 silly registry.get     'x-timer': 'S1441096349.128014,VS0,VE1',
+35 silly registry.get     vary: 'Accept' } ]
+36 silly addNameRange number 2 { name: 'moment', range: '*', hasData: true }
+37 silly addNameRange versions [ 'moment',
+37 silly addNameRange   [ '1.0.0',
+37 silly addNameRange     '1.0.1',
+37 silly addNameRange     '1.1.0',
+37 silly addNameRange     '1.1.1',
+37 silly addNameRange     '1.2.0',
+37 silly addNameRange     '1.3.0',
+37 silly addNameRange     '1.4.0',
+37 silly addNameRange     '1.5.0',
+37 silly addNameRange     '1.5.1',
+37 silly addNameRange     '1.6.0',
+37 silly addNameRange     '1.6.1',
+37 silly addNameRange     '1.6.2',
+37 silly addNameRange     '1.7.0',
+37 silly addNameRange     '1.7.1',
+37 silly addNameRange     '1.7.2',
+37 silly addNameRange     '2.0.0',
+37 silly addNameRange     '2.1.0',
+37 silly addNameRange     '2.2.1',
+37 silly addNameRange     '2.3.0',
+37 silly addNameRange     '2.3.1',
+37 silly addNameRange     '2.4.0',
+37 silly addNameRange     '2.5.0',
+37 silly addNameRange     '2.5.1',
+37 silly addNameRange     '2.6.0',
+37 silly addNameRange     '2.7.0',
+37 silly addNameRange     '2.8.1',
+37 silly addNameRange     '2.8.2',
+37 silly addNameRange     '2.8.3',
+37 silly addNameRange     '2.8.4',
+37 silly addNameRange     '2.9.0',
+37 silly addNameRange     '2.10.2',
+37 silly addNameRange     '2.10.3',
+37 silly addNameRange     '2.10.5',
+37 silly addNameRange     '2.10.6' ] ]
+38 verbose addNamed [ 'moment', '2.10.6' ]
+39 verbose addNamed [ '2.10.6', '2.10.6' ]
+40 silly lockFile 81e32ec7-moment-2-10-6 moment@2.10.6
+41 verbose lock moment@2.10.6 /Users/mac/.npm/81e32ec7-moment-2-10-6.lock
+42 silly lockFile fa7731cd-mjs-org-moment-moment-2-10-6-tgz https://registry.npmjs.org/moment/-/moment-2.10.6.tgz
+43 verbose lock https://registry.npmjs.org/moment/-/moment-2.10.6.tgz /Users/mac/.npm/fa7731cd-mjs-org-moment-moment-2-10-6-tgz.lock
+44 verbose addRemoteTarball [ 'https://registry.npmjs.org/moment/-/moment-2.10.6.tgz',
+44 verbose addRemoteTarball   '6cb21967c79cba7b0ca5e66644f173662b3efa77' ]
+45 info retry fetch attempt 1 at 16:32:35
+46 verbose fetch to= /var/folders/q7/gm48tyl97xl5xpg1gsns4x740000gn/T/npm-33792-V0fKTdo0/registry.npmjs.org/moment/-/moment-2.10.6.tgz
+47 http GET https://registry.npmjs.org/moment/-/moment-2.10.6.tgz
+48 http 200 https://registry.npmjs.org/moment/-/moment-2.10.6.tgz
+49 silly lockFile fa7731cd-mjs-org-moment-moment-2-10-6-tgz https://registry.npmjs.org/moment/-/moment-2.10.6.tgz
+50 silly lockFile fa7731cd-mjs-org-moment-moment-2-10-6-tgz https://registry.npmjs.org/moment/-/moment-2.10.6.tgz
+51 silly lockFile 81e32ec7-moment-2-10-6 moment@2.10.6
+52 silly lockFile 81e32ec7-moment-2-10-6 moment@2.10.6
+53 silly lockFile 42aa250a-moment moment@
+54 silly lockFile 42aa250a-moment moment@
+55 error Error: shasum check failed for /var/folders/q7/gm48tyl97xl5xpg1gsns4x740000gn/T/npm-33792-V0fKTdo0/registry.npmjs.org/moment/-/moment-2.10.6.tgz
+55 error Expected: 6cb21967c79cba7b0ca5e66644f173662b3efa77
+55 error Actual:   150b889f43266bee20e4bd059caf03c0f24affed
+55 error From:     https://registry.npmjs.org/moment/-/moment-2.10.6.tgz
+55 error     at /usr/local/lib/node_modules/npm/node_modules/sha/index.js:38:8
+55 error     at ReadStream.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/sha/index.js:85:7)
+55 error     at ReadStream.emit (events.js:117:20)
+55 error     at _stream_readable.js:944:16
+55 error     at process._tickCallback (node.js:442:13)
+56 error If you need help, you may report this *entire* log,
+56 error including the npm and node versions, at:
+56 error     <http://github.com/npm/npm/issues>
+57 error System Darwin 13.4.0
+58 error command "node" "/usr/local/bin/npm" "install" "moment" "--save"
+59 error cwd /Users/mac/skidxjq/1/server
+60 error node -v v0.10.34
+61 error npm -v 1.4.28
+62 verbose exit [ 1, true ]

@@ -5,16 +5,59 @@
  */
 angular.module('app')
     .run(
-    [          '$rootScope', '$state', '$stateParams',
-        function ($rootScope,   $state,   $stateParams) {
+    [          '$rootScope', '$state', '$stateParams', 'Auth', 'AUTH_EVENTS', 'USER_ROLES',
+        function ($rootScope,   $state,   $stateParams, Auth, AUTH_EVENTS, USER_ROLES) {
+
+            //before each state change, check if the user is logged in
+            //and authorized to move onto the next state
+            $rootScope.$on('$stateChangeStart', function (event, next) {
+                var authorizedRoles = next.data.authorizedRoles;
+                console.log('next data author');
+                console.log(authorizedRoles);
+                if(authorizedRoles.length === 0){
+                    console.log("it is an empty arry for signin");
+                    //$state.go("access.signin");
+
+
+                }else
+                if (!Auth.isAuthorized(authorizedRoles)) {
+                    console.log("is not authorized");
+                    event.preventDefault();
+                    if (Auth.isAuthenticated()) {
+                        // user is not allowed
+                        console.log("user is not allowed");
+                        $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+                    } else {
+                        // user is not logged in
+                        console.log("user is not logged in");
+                        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+                        $state.go("access.signin");
+                    }
+                }
+            });
+
+            /* To show current active state on menu */
+            $rootScope.getClass = function(path) {
+                if ($state.current.name == path) {
+                    return "active";
+                } else {
+                    return "";
+                }
+            }
+
+            $rootScope.logout = function(){
+                Auth.logout();
+            };
+
+
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
         }
     ]
 )
     .config(
-    [          '$stateProvider', '$urlRouterProvider',
-        function ($stateProvider,   $urlRouterProvider) {
+    [          '$stateProvider', '$urlRouterProvider', 'USER_ROLES',
+        function ($stateProvider,   $urlRouterProvider, USER_ROLES) {
 
             $urlRouterProvider
                 .otherwise('/app/overview/');
@@ -31,7 +74,29 @@ angular.module('app')
                                     'js/controllers/chart.js']);
 
                             }]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.guest]
                     }
+
+                })
+                ///////////////////////////////////////
+                .state('app.admin',{
+                    url:'/admin',
+                    templateUrl:'tpl/unicom/admin.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad','uiLoad',
+                            function ($ocLazyLoad,uiLoad) {
+                                return ($ocLazyLoad,uiLoad).load([
+                                    'js/controllers/unicom/adminController.js'
+                                    ]);
+
+                            }]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.admin]
+                    }
+
 
                 })
                 .state('app.disturbAnalyze',{
@@ -47,6 +112,9 @@ angular.module('app')
                                 );
 
                             }]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.guest]
                     }
                     //resolve: {
                     //    deps: ['$ocLazyLoad',
@@ -95,11 +163,14 @@ angular.module('app')
                                 ]);
 
                             }]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.guest]
                     }
                 })
 
                 .state('app.blackcardRecognize',{
-                    url:'/blackcardRecognize',
+                    url:'/siblackcardRecognize',
                     templateUrl:'tpl/unicom/blackcardRecognize.html',
                     resolve: {
                         deps: ['$ocLazyLoad','uiLoad',
@@ -109,6 +180,9 @@ angular.module('app')
                                 ]);
 
                             }]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.guest]
                     }
                 })
                 .state('app.iuChart', {
@@ -140,6 +214,9 @@ angular.module('app')
                                 ]);
 
                             }]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.guest]
                     }
                 })
 
@@ -154,6 +231,9 @@ angular.module('app')
                                     'js/controllers/chart.js']);
 
                             }]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.guest]
                     }
                 })
                 .state('app.userAnalyze',{
@@ -180,26 +260,13 @@ angular.module('app')
                                 ]);
 
                             }]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor, USER_ROLES.guest]
                     }
 
                 })
 
-                .state('app.baidu',{
-                    url:'/baidu',
-                    templateUrl:'tpl/unicom/baidu.html',
-                    resolve: {
-                        deps: ['$ocLazyLoad','uiLoad',
-                            function ($ocLazyLoad,uiLoad) {
-                                return ($ocLazyLoad,uiLoad).load([
-
-                                    'vendor/static/femtocell/js/femtocellForTemplate.min.js'
-
-                                ]);
-
-                            }]
-                    }
-
-                })
 
 
                 .state('app.test', {
@@ -215,16 +282,7 @@ angular.module('app')
                             }]
                     }
                 })
-                .state('app.hospital', {
-                    url: '/hospital',
-                    templateUrl: 'tpl/hospital.html'
-                    //resolve: {
-                    //    deps: ['$ocLazyLoad',
-                    //        function( $ocLazyLoad ){
-                    //            return $ocLazyLoad.load(['js/controllers/chart.js']);
-                    //        }]
-                    //}
-                })
+
                 .state('app', {
                     abstract: true,
                     url: '/app',
@@ -525,6 +583,9 @@ angular.module('app')
                             function( uiLoad ){
                                 return uiLoad.load( ['js/controllers/signin.js'] );
                             }]
+                    },
+                    data: {
+                        authorizedRoles: []
                     }
                 })
                 .state('access.signup', {

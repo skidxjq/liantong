@@ -8,20 +8,32 @@ var superagent = require('superagent');
 var http = require('http');
 var qs = require('querystring');
 var mongoose=require('mongoose');
-var app = express();
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 var routes ={
-    overview:   require( './routes/overview' ),
-    disturb:    require('./routes/disturb'),
-    users:   require('./routes/users')
+    overview :   require( './routes/overview' ),
+    disturb :    require('./routes/disturb'),
+    users :   require('./routes/users'),
+    admin : require('./routes/admin')
 };
 
+var app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
 /*
  *设置跨域访问
  */
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
@@ -33,20 +45,15 @@ app.get('/users/getUsersSum' , routes.users.getUsersSum);
 app.get('/users/insertMock' , routes.users.insertMock);
 
 //overview page
-app.get('/overview/getOverviewInfo' ,   routes.overview.getOverviewInfo);
+app.get('/overview/getOverviewInfo' , routes.overview.getOverviewInfo);
+app.get('/overview/pieData' , routes.overview.getPieData);
 
-
-//app.get('/getlistByPage/:page',routes.overview.getUserListByPage);
-//
-//app.get('/getUserListCount',routes.overview.getUserListCount);
-//
-//app.get('/testPage',routes.overview.testPage);
-//
-//app.get('/testChat',function(req,res){
-//    console.log(__dirname);
-//    res.sendFile(__dirname+'/views/chat.html');
-//
-//})
+//admin 
+app.post('/admin/signup', routes.admin.isUserExists, routes.admin.signup);
+app.post('/admin/checkLogin', routes.admin.findUser);
+app.post('/admin/add', routes.admin.isUserExists, routes.admin.signup);
+app.get('/admin/list', routes.admin.getAdminList);
+app.post('/admin/edit', routes.admin.edit);
 
 app.listen(8888, function () {
     console.log('app is listening at port 8888');

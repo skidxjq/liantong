@@ -93,7 +93,7 @@ app.controller('overViewController', ['$scope', '$http','$localStorage', '$timeo
 
                 
                 //五个info数字
-                $scope.info = response['overviewInfo'];
+                $scope.info = response['info'];
 
                 //画图
                 $scope.echarts.options.pieDataTwoOption.series[0].data = response['pieDataTwo'];
@@ -210,6 +210,19 @@ app.controller('overViewController', ['$scope', '$http','$localStorage', '$timeo
         return new Date(parseInt(nS)).toLocaleString().substr(0,10);
     };
 
+    $scope.getPieData = function(){
+        $http.get($scope.serverUrl+"/overview/pieData")
+            .success(function(response){
+
+                //画图
+                $scope.echarts.options.pieDataOneOption.series[0].data = response['pieDataOne'];
+                $scope.echarts.options.pieDataOneOption.version++;
+
+                //画图
+                $scope.echarts.options.pieDataThreeOption.series[0].data = response['pieDataThree'];
+                $scope.echarts.options.pieDataThreeOption.version++;
+            });
+    }
     $scope.repaint=function(){
 
         $scope.getOverviewInfo();
@@ -218,9 +231,10 @@ app.controller('overViewController', ['$scope', '$http','$localStorage', '$timeo
         //$scope.getDisturbCount();
         //$scope.getBlackCardCount();
         //$scope.getCheatCount();
-        $scope.getPieDataOne();
-        $scope.getPieDataTwo();
-        $scope.getPieDataThree();
+        //$scope.getPieDataOne();
+        $scope.getPieData();
+        //$scope.getPieDataTwo();
+        //$scope.getPieDataThree();
         $scope.getTimeLine();
 
     }

@@ -1,0 +1,148 @@
+<div class="row m-l m-t-md m-r" ng-controller="adminController">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            管理员列表
+        </div>
+        <div>
+            <table class="table table-hover " >
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>登陆姓名</th>
+                    <th>权限</th>
+                    <th>关联邮箱</th>
+                    <th>创建日期</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody >
+                <!--<tr ng-repeat="obj in userTableJson">-->
+                <!--<tr>-->
+                <tr ng-repeat="obj in adminList">
+
+                    <td>{{obj._id}}</td>
+                    <td>{{obj.username}}</td>
+                    <td>{{levels[obj.level]}}</td>
+                    <td>{{obj.email}}</td>
+                    <td>{{obj.dateTime}}</td>
+                    <td><div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+
+                        <a class="text-success" ng-click="editAdmin(obj)">
+                            <i class="icon-pencil bigger-130"></i>
+                        </a>
+
+                        <a class="text-danger-dker" href="#">
+                            <i class="icon-trash bigger-130"></i>
+                        </a>
+                    </div></td>
+                </tr>
+                </tbody>
+
+            </table>
+            <button class="btn btn-sm btn-info pull-left m-t-md" data-target="#myModal" ng-click="addAdmin()" >
+                <i class="icon-plus"></i>
+                新增管理员
+            </button>
+
+        </div>
+    </div>
+    <!-- edit contact modal -->
+    <script type="text/ng-template" id="editAdminModal" >
+        <div modal="contactEdit">
+            <div class="modal-header">
+                <h3>编辑管理员</h3>
+            </div>
+            <div class="modal-body">
+                <form name="form" class="form-validation">
+
+                            <div class="form-group">
+                                <label>用户姓名 <em class="text-muted">(allow 'a-zA-Z0-9', 4-10 length)</em></label>
+                                <input type="text" class="form-control" ng-model="edit.username" ng-pattern="/^[a-zA-Z0-9]{4,10}$/" required >
+                            </div>
+                            <div class="form-group">
+                                <label>电子邮箱</label>
+                                <input type="email" class="form-control" ng-model="edit.email" required >
+                            </div>
+
+
+                            <div class="form-group pull-in clearfix">
+                                <div class="col-sm-6">
+                                    <label>输入密码</label>
+                                    <input type="password" class="form-control" name="password" ng-model="edit.password" required >
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>重复密码</label>
+                                    <input type="password" class="form-control" name="confirm_password" required ng-model="confirm_password" ui-validate=" '$value==edit.password' " ui-validate-watch=" 'edit.password' ">
+                                    <span ng-show='form.confirm_password.$error.validator'>Passwords do not match!</span>
+                                </div>
+                            </div>
+
+
+                        <!--<footer class="panel-footer text-right bg-light lter">-->
+                            <!--<button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-click="editSubmit()">提交</button>-->
+                            <!--<button  class="btn btn-warning"  ng-click="cancel()">取消</button>-->
+                        <!--</footer>-->
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-click="editSubmit()">提交</button>
+
+                <!--<button ng-click="editSubmit()" class="btn btn-info"><i class="icon-plus icon-white"></i> E</button>-->
+                <button class="btn btn-warning cancel" ng-click="cancel()">取消</button>
+            </div>
+        </div>
+    </script>
+
+
+    <!-- add contact modaL -->
+    <script type="text/ng-template" id="addAdminModal" >
+        <div modal="addAdmin">
+            <div class="modal-header">
+                <h3>增加管理员</h3>
+            </div>
+            <div class="modal-body">
+                <form name="form" class="form-validation">
+
+                    <div class="form-group">
+                        <label>用户姓名 <em class="text-muted">(allow 'a-zA-Z0-9', 4-10 length)</em></label>
+                        <input type="text" class="form-control" ng-model="add.username" ng-pattern="/^[a-zA-Z0-9]{4,10}$/" required >
+                    </div>
+                    <div class="form-group">
+                        <label>电子邮箱</label>
+                        <input type="email" class="form-control" ng-model="add.email" required >
+                    </div>
+
+
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
+                            <label>输入密码</label>
+                            <input type="password" class="form-control" name="password" ng-model="add.password" required >
+                        </div>
+                        <div class="col-sm-6">
+                            <label>重复密码</label>
+                            <input type="password" class="form-control" name="confirm_password" required ng-model="confirm_password" ui-validate=" '$value==add.password' " ui-validate-watch=" 'add.password' ">
+                            <span ng-show='form.confirm_password.$error.validator'>Passwords do not match!</span>
+                        </div>
+                    </div>
+
+
+                    <!--<footer class="panel-footer text-right bg-light lter">-->
+                    <!--<button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-click="addSubmit()">提交</button>-->
+                    <!--<button  class="btn btn-warning"  ng-click="cancel()">取消</button>-->
+                    <!--</footer>-->
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-click="addSubmit()">提交</button>
+
+                <!--<button ng-click="addSubmit()" class="btn btn-info"><i class="icon-plus icon-white"></i> E</button>-->
+                <button class="btn btn-warning cancel" ng-click="cancel()">取消</button>
+            </div>
+        </div>
+    </script>
+
+
+
+</div>
