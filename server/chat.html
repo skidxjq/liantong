@@ -8,9 +8,9 @@
     message:<input type="text" name="username" id="m"/>
     <button id="submit">emit</button>
     <ul id="messages"></ul>
-<script src="/socket.io/socket.io.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-<script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
     var socket=io();
     $('#submit').bind('click',function(){
         console.log($('#m').val());
@@ -25,7 +25,6 @@
 //        return false;
 //    });
 </script>
-
 
 </body>
 </html>

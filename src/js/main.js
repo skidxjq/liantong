@@ -109,18 +109,18 @@ angular.module('app')
         //$scope.loginUser = ;
         //console.log(Session);
 
-        $scope.getUserName = function(){
-
-          console.log("main.js getUserName");
-          console.log($window.sessionStorage.getItem("userInfo"));
-          $scope.$apply();
-
-          return $window.sessionStorage.getItem("userInfo").userName;
-        };
-
-        $scope.loginUser = $scope.getUserName();
-        //$scope.$apply();
-
+        //$scope.getUserName = function(){
+        //
+        //  console.log("main.js getUserName");
+        //  console.log($window.sessionStorage.getItem("userInfo"));
+        //  //$scope.$apply();
+        //
+        //  return $window.sessionStorage.getItem("userInfo").userName;
+        //};
+        //
+        //$scope.loginUser = $scope.getUserName();
+        ////$scope.$apply();
+        //
 
         $scope.currentUser = null;
         $scope.userRoles = USER_ROLES;

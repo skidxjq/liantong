@@ -38,6 +38,7 @@ var admin = new mongoose.Schema({
     password: String,
     email : String,
     level : Number,
+    userRole : String,
     dateTime: Date
     //salt: String,
     //hash: String

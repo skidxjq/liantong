@@ -5,7 +5,13 @@ app.controller('adminController', ['$scope', '$http','$modal', function ($scope,
     console.log($modal);
     console.log("into adminController");
     $scope.adminList = [];
-    $scope.levels = ['管理员', '一般用户', '只读用户'];
+    //$scope.levels = ['管理员', '一般用户', '只读用户'];
+
+    $scope.userRoles = {
+        "admin" : "管理员",
+        "editor" : "编辑员",
+        "guest" : "访客"
+    }
 
     $scope.getAdminList =  function(){
         $http.get($scope.serverUrl + "/admin/list")
@@ -49,8 +55,22 @@ app.controller('adminController', ['$scope', '$http','$modal', function ($scope,
         });
     };
 
-    $scope.delAdmin = function(id){
-        //$
+    $scope.delAdmin = function(obj){
+        
+        var _id = obj._id;
+        console.log(obj);
+        var modalInstance = $modal.open({
+            templateUrl: 'delAdminModal',
+            controller: delAdminModalCtrl,
+            resolve: {
+                _id : function() {
+                    return _id;
+                },
+                serverUrl: function(){
+                    return $scope.serverUrl;
+                }
+            }
+        });
     };
 
 
@@ -71,6 +91,8 @@ var editAdminModalCtrl = function($scope, $modalInstance, $window, admin,serverU
     $scope.edit._id = admin._id;
     $scope.edit.username = admin.username;
     $scope.edit.email = admin.email;
+    $scope.edit.userRole = admin.userRole;
+
     console.log($scope.edit);
     $scope.editSubmit = function() {
         $http({
@@ -113,6 +135,34 @@ var addAdminModalCtrl = function($scope, $modalInstance, $window,$http,serverUrl
             }}).then(function(result) {
             console.log(result);
             $modalInstance.close($window.location.reload());
+
+        }, function(error) {
+            console.log(error);
+        });
+    };
+
+    $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+    }
+    
+};
+
+
+var delAdminModalCtrl = function($scope, $modalInstance, $window,$http,serverUrl,_id) {
+
+    
+    $scope.delSubmit = function() {
+        $http({
+            method: 'POST',
+            url: serverUrl + "/admin/del",
+            data: {"_id" : _id},
+            headers: {
+                'Content-Type': 'application/json'
+            }})
+        .then(function(result) {
+            console.log(result);
+            if(result.ok ===1)
+                $modalInstance.close($window.location.reload());
 
         }, function(error) {
             console.log(error);

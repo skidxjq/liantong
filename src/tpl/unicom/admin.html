@@ -22,7 +22,8 @@
 
                     <td>{{obj._id}}</td>
                     <td>{{obj.username}}</td>
-                    <td>{{levels[obj.level]}}</td>
+                    <!--<td>{{levels[obj.level]}}</td>-->
+                    <td>{{userRoles[obj.userRole]}}</td>
                     <td>{{obj.email}}</td>
                     <td>{{obj.dateTime}}</td>
                     <td><div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
@@ -31,7 +32,7 @@
                             <i class="icon-pencil bigger-130"></i>
                         </a>
 
-                        <a class="text-danger-dker" href="#">
+                        <a class="text-danger-dker" ng-click="delAdmin(obj)">
                             <i class="icon-trash bigger-130"></i>
                         </a>
                     </div></td>
@@ -55,33 +56,50 @@
             <div class="modal-body">
                 <form name="form" class="form-validation">
 
-                            <div class="form-group">
-                                <label>用户姓名 <em class="text-muted">(allow 'a-zA-Z0-9', 4-10 length)</em></label>
-                                <input type="text" class="form-control" ng-model="edit.username" ng-pattern="/^[a-zA-Z0-9]{4,10}$/" required >
-                            </div>
-                            <div class="form-group">
-                                <label>电子邮箱</label>
-                                <input type="email" class="form-control" ng-model="edit.email" required >
-                            </div>
+                    <div class="form-group">
+                        <label>用户姓名 <em class="text-muted">(allow 'a-zA-Z0-9', 4-10 length)</em></label>
+                        <input type="text" class="form-control" ng-model="edit.username" ng-pattern="/^[a-zA-Z0-9]{4,10}$/" required >
+                    </div>
+                    <div class="form-group">
+                        <label>电子邮箱</label>
+                        <input type="email" class="form-control" ng-model="edit.email" required >
+                    </div>
+ <div class="radio">
+                        <label class="i-checks">
+                            <input type="radio" name="userRole" value="admin" ng-model="edit.userRole">
+                            <i></i>
+                            管理员
+                        </label>
+                        <label class="i-checks">
+                            <input type="radio" name="userRole" value="editor" ng-model="edit.userRole">
+                            <i></i>
+                            编辑员
+                        </label>
+                        <label class="i-checks">
+                            <input type="radio" name="userRole" value="guest" ng-model="edit.userRole" checked>
+                            <i></i>
+                            访客
+                        </label>
+                    </div>
 
 
-                            <div class="form-group pull-in clearfix">
-                                <div class="col-sm-6">
-                                    <label>输入密码</label>
-                                    <input type="password" class="form-control" name="password" ng-model="edit.password" required >
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>重复密码</label>
-                                    <input type="password" class="form-control" name="confirm_password" required ng-model="confirm_password" ui-validate=" '$value==edit.password' " ui-validate-watch=" 'edit.password' ">
-                                    <span ng-show='form.confirm_password.$error.validator'>Passwords do not match!</span>
-                                </div>
-                            </div>
+                    <div class="form-group pull-in clearfix">
+                        <div class="col-sm-6">
+                            <label>输入密码</label>
+                            <input type="password" class="form-control" name="password" ng-model="edit.password" required >
+                        </div>
+                        <div class="col-sm-6">
+                            <label>重复密码</label>
+                            <input type="password" class="form-control" name="confirm_password" required ng-model="confirm_password" ui-validate=" '$value==edit.password' " ui-validate-watch=" 'edit.password' ">
+                            <span ng-show='form.confirm_password.$error.validator'>Passwords do not match!</span>
+                        </div>
+                    </div>
 
 
-                        <!--<footer class="panel-footer text-right bg-light lter">-->
-                            <!--<button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-click="editSubmit()">提交</button>-->
-                            <!--<button  class="btn btn-warning"  ng-click="cancel()">取消</button>-->
-                        <!--</footer>-->
+                    <!--<footer class="panel-footer text-right bg-light lter">-->
+                    <!--<button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-click="editSubmit()">提交</button>-->
+                    <!--<button  class="btn btn-warning"  ng-click="cancel()">取消</button>-->
+                    <!--</footer>-->
                 </form>
 
             </div>
@@ -112,7 +130,23 @@
                         <label>电子邮箱</label>
                         <input type="email" class="form-control" ng-model="add.email" required >
                     </div>
-
+                    <div class="radio">
+                        <label class="i-checks">
+                            <input type="radio" name="userRole" value="admin" ng-model="add.userRole">
+                            <i></i>
+                            管理员
+                        </label>
+                        <label class="i-checks">
+                            <input type="radio" name="userRole" value="editor" ng-model="add.userRole">
+                            <i></i>
+                            编辑员
+                        </label>
+                        <label class="i-checks">
+                            <input type="radio" name="userRole" value="guest" ng-model="add.userRole" checked>
+                            <i></i>
+                            访客
+                        </label>
+                    </div>
 
                     <div class="form-group pull-in clearfix">
                         <div class="col-sm-6">
@@ -142,6 +176,22 @@
             </div>
         </div>
     </script>
+
+
+    <!-- del contact modaL -->
+    <script type="text/ng-template" id="delAdminModal" >
+        <div modal="delAdmin">
+            <div class="modal-header center">
+                <h3>确认删除？</h3>
+            </div>
+            <div class="modal-body">
+              <button type="submit" class="btn btn-success" ng-click="delSubmit(obj)">提交</button>
+               <button class="btn btn-warning cancel" ng-click="cancel()">取消</button>
+            </div>
+           
+        </div>
+    </script>
+
 
 
 

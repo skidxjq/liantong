@@ -12,14 +12,15 @@ var signup = exports.signup = function (req, res){
     var password = req.body.password;
     var username = req.body.username;
     var email = req.body.email;
-    var level = req.body.level;
+    //var level = req.body.level;
+    var userRole = req.body.userRole;
 
     console.log(password);
     var admin = new Admin({
         username : username,
         password : md5(password),
         email : email,
-        level : level,
+        userRole : userRole,
         dateTime : moment(new Date()).format("YYYY-MM-DD HH:mm:ss")
     });
     admin.save(function(err, newUser){
@@ -83,12 +84,14 @@ exports.edit = function(req, res, next){
     var password = req.body.password;
     var username = req.body.username;
     var email = req.body.email;
+    var userRole = req.body.userRole
     //var level = req.body.level;
     var _id = req.body._id;
     var newUser={
         username : username,
         password : md5(password),
         email : email,
+        userRole : userRole,
         //level : level,
         dateTime : moment(new Date()).format("YYYY-MM-DD HH:mm:ss")
     };
@@ -105,6 +108,13 @@ exports.edit = function(req, res, next){
             res.json(docs);
         })
 };
+
+exports.del = function(req, res, next){
+    var _id = req.body._id;
+    Admin.remove({_id:_id}, function(err, docs) {
+        res.send(docs);
+    })
+}
 
 
 
